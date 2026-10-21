@@ -29,19 +29,12 @@
   // --- Window Controls Overlay (TitleBar Overlay) Parchment Sync ---
   function setupTitleBarOverlay() {
     if (window.electronNative && typeof window.electronNative.setTitleBarOverlay === 'function') {
-      if (!window.electronNative.__ag_overlay_hooked) {
-        window.electronNative.__ag_overlay_hooked = true;
-        const rawSet = window.electronNative.setTitleBarOverlay.bind(window.electronNative);
-        window.electronNative.setTitleBarOverlay = function(opts) {
-          return rawSet({
-            color: '#F6EFE2',
-            symbolColor: '#2B1D11',
-            height: 35
-          });
-        };
-      }
       try {
-        window.electronNative.setTitleBarOverlay();
+        window.electronNative.setTitleBarOverlay({
+          color: '#F6EFE2',
+          symbolColor: '#2B1D11',
+          height: 35
+        });
       } catch (e) {}
     }
   }
@@ -433,7 +426,7 @@
   --input: #E2BE66 !important;
   --ring: #9B3B24 !important;
   --radius: 8px !important;
-  --sidebar: #18120D !important;
+  --sidebar: #F6EFE2 !important;
   --sidebar-foreground: #F7EAD0 !important;
   --color-sidebar: #18120D !important;
   --color-sidebar-foreground: #F7EAD0 !important;
@@ -633,6 +626,7 @@ html[data-sidebar-state="closed"] [data-testid="title-menu-bar"] [data-testid="t
   background-color: #18120D !important;
   color: #F7EAD0 !important;
   border-right: 1.5px solid #3A291C !important;
+  --sidebar: #18120D !important;
   --sidebar-muted: #241A12 !important;
   --sidebar-secondary: #241A12 !important;
   --row-bg: #18120D !important;

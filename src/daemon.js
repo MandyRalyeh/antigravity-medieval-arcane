@@ -116,7 +116,7 @@ function manageTarget(target) {
     // Periodic health check & self-healing every 3500ms with throttling
     connState.intervalId = setInterval(() => {
       if (ws.readyState !== WebSocket.OPEN) return;
-      const checkExpr = 'Boolean(document.getElementById("ag-custom-fonts") && (window.__ag_patch_version === "20261022-medieval-arcane-v14" || window.__ag_patch_version === "20261013-high-contrast-v1"))';
+      const checkExpr = 'Boolean(document.getElementById("ag-custom-fonts") && ((window.__ag_patch_version && window.__ag_patch_version.startsWith("20261022-medieval-arcane")) || window.__ag_patch_version === "20261013-high-contrast-v1"))';
       const checkId = msgId++;
       
       const onCheckResponse = (event) => {

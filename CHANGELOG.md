@@ -8,6 +8,19 @@ All notable changes to this project are documented in this file in adherence to 
 
 ---
 
+## [14.2.0] - 2026-10-22
+
+### Problems Encountered
+- **Black Titlebar Band & Three-Color Hard Cut**: Transparent background on `[data-testid="title-menu-bar"]` allowed its native `.bg-sidebar` class to paint a 35px solid black strip across the entire top of the application. Windows rendered white caption buttons on the top right, while the page below was parchment, creating a jarring visual clash of three disconnected color bands.
+- **Cycle Conflict on Menubar Buttons**: Re-applying sidebar open/closed responsive colors to top menubar buttons caused them to become pitch dark `#2B1D11` over the black bar when collapsed and invisible cream `#F7EAD0` over parchment when expanded. Unlike row 2 header controls, the titlebar is an omnipresent top window frame running across the entire width independent of the sidebar layout underneath.
+
+### Solutions & Optimizations
+- **Global Seamless Ivory Parchment Titlebar**: Pinned an ivory parchment background (`#F6EFE2` with gentle linear gradient) to `[data-testid="title-menu-bar"]` and its container with higher selector priority, eliminating the black bar and creating a smooth, unified frame across the entire window.
+- **Consistent Iron-Gall Bronze Triggers**: Menubar triggers (`Antigravity`, `File`, `View`, `Window`) now consistently use deep iron-gall bronze (`#2B1D11`) in all states, decoupled from sidebar toggles, ensuring sharp contrast and zero regression cycles.
+- **Floating Obsidian Grimoire Dropdown Menu**: Preserved the dark obsidian floating card with gold filigree border and crystal-clear options contrast when menus are clicked.
+
+---
+
 ## [14.1.0] - 2026-10-22
 
 ### Problems Encountered

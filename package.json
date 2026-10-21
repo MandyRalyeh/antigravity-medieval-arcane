@@ -1,6 +1,6 @@
 {
   "name": "antigravity-medieval-arcane",
-  "version": "14.1.0",
+  "version": "14.2.0",
   "description": "Medieval Arcane fantasy parchment theme, Three.js stardust particles, and responsive UI engine for Google Antigravity via non-invasive Chrome DevTools Protocol runtime injection.",
   "main": "src/daemon.js",
   "scripts": {

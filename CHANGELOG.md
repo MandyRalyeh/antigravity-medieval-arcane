@@ -8,6 +8,21 @@ All notable changes to this project are documented in this file in adherence to 
 
 ---
 
+## [14.3.0] - 2026-10-22
+
+### Problems Encountered
+- **White/Black Rectangle on Windows Caption Buttons (Window Controls Overlay)**: In Windows light mode, the top-right window controls (minimize, maximize, close) rendered over a stark white background block; in dark mode, Antigravity's internal theme logic dynamically called Electron's `setTitleBarOverlay` with `#131313` / `#18120D`, turning the three buttons into an unsightly black block. This occurred because Antigravity's underlying theme listener hardcodes `setTitleBarOverlay({ color: q || (n ? "#131313" : "#FFFFFF") })` based on system dark/light mode rather than the active parchment theme.
+
+### Solutions & Optimizations
+- **Native TitleBar Overlay Interception & Injection**: Hooked into `window.electronNative.setTitleBarOverlay` directly from the runtime engine.
+- **Parchment Theme Harmonization**: Intercepts all system and Antigravity titlebar overlay updates to permanently enforce:
+  - `color: '#F6EFE2'` (warm ivory parchment background, seamlessly blending with the 35px menubar);
+  - `symbolColor: '#2B1D11'` (deep iron-gall bronze symbols, guaranteeing razor-sharp contrast for minimize, maximize, and close);
+  - `height: 35` (pixel-perfect height alignment).
+- **Persistent Synchronization**: Re-syncs on window focus, resize, and sidebar transitions, completely eliminating white and black caption blocks across all Windows display modes.
+
+---
+
 ## [14.2.0] - 2026-10-22
 
 ### Problems Encountered

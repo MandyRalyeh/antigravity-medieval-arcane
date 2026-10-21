@@ -20,14 +20,14 @@
     "chrome-devtools-protocol",
     "customization"
   ],
-  "author": "Mandy Ralyeh (https://github.com/MandyWednesday)",
+  "author": "Mandy Ralyeh (https://github.com/MandyRalyeh)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MandyWednesday/antigravity-medieval-arcane.git"
+    "url": "git+https://github.com/MandyRalyeh/antigravity-medieval-arcane.git"
   },
   "bugs": {
-    "url": "https://github.com/MandyWednesday/antigravity-medieval-arcane/issues"
+    "url": "https://github.com/MandyRalyeh/antigravity-medieval-arcane/issues"
   },
-  "homepage": "https://github.com/MandyWednesday/antigravity-medieval-arcane#readme"
+  "homepage": "https://github.com/MandyRalyeh/antigravity-medieval-arcane#readme"
 }

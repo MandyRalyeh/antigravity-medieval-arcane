@@ -12,150 +12,155 @@
   <img src="https://img.shields.io/badge/engine-Three.js%20WebGL%20%2B%20SMIL-darkgoldenrod.svg?style=flat-square" alt="Engine">
 </p>
 
-> **面向 Google Antigravity 客户端的中世纪奥术魔导书（Medieval Arcane）全套沉浸式主题与界面补丁**  
-> *基于 Chrome DevTools Protocol 运行时非侵入热注入 · 不改原包 · 不重打 asar · 零破坏自动更新 · 随时一键无损撤销*
+<p align="center">
+  <b>English</b> · <a href="README.zh-CN.md">简体中文</a>
+</p>
+
+> **An immersive Medieval Arcane Grimoire fantasy theme and UI runtime enhancement engine for Google Antigravity.**  
+> *Non-invasive runtime hot-injection via Chrome DevTools Protocol · Zero binary patching · Zero .asar rebuilding · Preserves client auto-updates · 100% reversible with one click.*
 
 ---
 
-## 这是什么
+## What Is This?
 
-这是我结对使用 Antigravity 开发的一套个人自用的 Antigravity 界面补丁与沉浸式中世纪奥术主题（Medieval Arcane）。
+This is a personal interface patch and immersive Medieval Arcane theme I developed while pair-programming with Antigravity.
 
-如果你和我一样每天长时间在 Google Antigravity 里面写代码、推演系统架构，原生的冷灰色工业界面看久了眼睛很容易产生视觉疲劳。而我更喜欢那种古典手抄本、羊皮纸书卷以及微弱金色魔导星尘带来的专注与平静感。
+If you spend hours every day coding and reasoning complex system architectures in Google Antigravity, the default cold-grey industrial interface can quickly cause eye strain. I much prefer the focus, warmth, and tranquility evoked by illuminated manuscripts, vintage vellum parchment, and ambient floating golden stardust.
 
-于是我为 Antigravity 打造了这套从色彩、字体、微粒动效到交互逻辑完全打磨的主题系统：
+To achieve this, I built an end-to-end theme and interaction engine customized for Antigravity:
 
-- 📜 **微光古典羊皮纸主区**：告别刺眼白屏与冰冷工程灰，主工作区覆以无缝高保真暖色羊皮纸底纹，文字呈现高对比铁胆铜墨（Iron Gall Ink）深褐色，边缘锐利不发虚；
-- 📖 **黑曜石木质魔导书侧边栏**：左侧侧边栏采用沉稳深色古籍装帧质感，配合中世纪火漆封印徽章与金色文字，实现自然舒适的空间视觉分层；
-- ✨ **Three.js WebGL 悬浮金色星尘**：底层独立开辟硬件加速 Canvas，以恒定 60 FPS 渲染微小的漂浮金尘粒子，带有微距鼠标斥力场，极具魔导沉浸感且绝不干扰代码判读；
-- 🛡️ **原生 SVG SMIL 双向旋转炼金法阵**：左侧与右上方点缀古秘术矢量水印法阵，由浏览器底层微内核驱动顺逆平滑公转，层级固定在底纹层，不干扰任何文本选择；
-- ⚡ **双状态侧边栏响应式感应引擎**：完美攻克 Antigravity 官方在侧边栏开关时硬编码 `aria-expanded="false"` 的属性假死 Bug，通过感知根节点内联变量 `--sidebar-width` 动态派发状态，展开态金字醒目、折叠态铜墨分明；
-- 🔧 **气泡操作栏与官方 Bug 修复**：完美恢复鼠标悬浮在提问卡片上的撤回编辑（Revert）与复制（Copy）功能栏，并防御性阻断 Antigravity 设置面板白屏死锁隐患。
+- 📜 **Luminous Vintage Parchment Workspace**: Replaces stark whites and industrial greys with a seamless high-fidelity parchment texture. Text is rendered in rich iron-gall ink bronze (`#2B1D11`), delivering razor-sharp contrast without harshness;
+- 📖 **Obsidian Leather Grimoire Sidebar**: A deep antique leather and dark wood sidebar (`#18120D`) featuring brass accents and wax seal insignia, establishing clear visual hierarchy between the navigation tree and the main workspace;
+- ✨ **Three.js WebGL Golden Stardust Engine**: An independent hardware-accelerated canvas rendering ~100 floating golden stardust particles at a constant 60 FPS, with subtle cursor proximity repulsion that never compromises code readability;
+- 🛡️ **Native SVG SMIL Dual-Rotating Alchemy Watermark**: Ornate alchemical vector watermarks gently rotating via the browser's native SMIL micro-kernel, resting on the bottom decorative layer (`z-index: 0`) so text selection remains completely frictionless;
+- ⚡ **Dual-State Sidebar Perception Engine**: Overcomes Antigravity's hardcoded `aria-expanded="false"` bug by dynamically tracking the root container's `--sidebar-width` inline variable, switching between luminous cream gold (`#F7EAD0`) when open and deep bronze (`#2B1D11`) when closed;
+- 🔧 **Action Bar Restoration & Crash Shield**: Completely restores missing message hover buttons (Revert/Undo, Copy, Timestamp) and defensively prevents settings modal crashes caused by unvalidated theme presets.
 
 ---
 
-## 视觉效果一览 (Showcase)
+## Visual Showcase
 
-### 1. 展开态深色魔导书侧边栏 vs 浅色羊皮纸工作区
-在打开侧边栏时，顶部羽毛图标、折叠键、搜索与前进后退自动切为明亮羊皮纸奶油金（`#F7EAD0`），高对比度一目了然：
+### 1. Grimoire Sidebar vs. Warm Parchment Canvas
+When expanding the sidebar, top navigation buttons automatically switch to glowing parchment gold (`#F7EAD0`), ensuring maximum contrast against dark wood:
 <p align="center">
   <img src="docs/images/05_sidebar_open_showcase.png" alt="Sidebar Open Showcase" width="850" />
 </p>
 
-### 2. 标准五大 Alert 警示卡片与复杂表格
-为 GitHub 规范的 NOTE / TIP / IMPORTANT / WARNING / CAUTION 重新调配了手抄本矿物色系，折叠引用与数据表格均有专属柔光衬底：
+### 2. Standard Alert Callouts & Complex Data Tables
+GitHub-style `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, and `CAUTION` alerts are re-tuned with medieval illuminated manuscript mineral pigments:
 <p align="center">
-  <img src="docs/images/02_alerts_and_tables.png" alt="Alerts and Tables" width="850" />
+  <img src="docs/images/02_alerts_and_tables.png" alt="Alert Callouts and Tables" width="850" />
 </p>
 
-### 3. 多语言高亮代码块与等宽排版
-Python、TypeScript、PowerShell、JSON 代码块深度调谐语法高亮，行高与字距针对长时间沉浸编程做了微调：
+### 3. Syntax Highlighting & Monospace Code Blocks
+Python, TypeScript, PowerShell, and JSON code blocks feature tuned syntax palettes and line heights designed for long, focused programming sessions:
 <p align="center">
   <img src="docs/images/03_code_and_mermaid.png" alt="Code Blocks Showcase" width="850" />
 </p>
 
-### 4. Mermaid 矢量图表与 LaTeX 科学公式
-流程图、时序图、状态图与 KaTeX 高斯积分、矩阵方程无缝融合，背景带有防穿透半透光卡片：
+### 4. Mermaid Vector Diagrams & Scientific Math (KaTeX)
+Flowcharts, sequence diagrams, and mathematical expressions render on semi-translucent soft-light cards, eliminating visual noise:
 <p align="center">
-  <img src="docs/images/04_mermaid_and_math.png" alt="Mermaid and Math" width="850" />
+  <img src="docs/images/04_mermaid_and_math.png" alt="Mermaid Diagrams and Math" width="850" />
 </p>
 
 ---
 
-## 为什么常规插件做法行不通？（技术底层剖析）
+## Why Conventional Approaches Fail (Under the Hood)
 
-在开发这套主题的过程中，遇到了三个常规手段根本无法解决的死穴：
+During the creation of this theme, three major architectural hurdles had to be solved:
 
-### 1. 客户端原包签名与更新保护
-Google Antigravity 是基于 Electron 构建的闭源现代客户端，不提供官方主题市场。如果通过解包修改 `app.asar` 或修改核心二进制：
-- 会直接破坏应用签名，甚至引发操作系统的安全拦截；
-- 只要客户端一升级，所有的本地修改会被彻底覆盖抹去。
+### 1. App Integrity & Signature Verification
+Google Antigravity is a modern Electron-based application without an official theme marketplace. Manually unpacking `app.asar` or modifying core binaries:
+- Breaks code signatures, triggering OS security warnings;
+- Gets completely wiped whenever the client auto-updates.
 
-**解决策略**：基于 **Chrome DevTools Protocol (CDP)**。Antigravity 在运行时会在本地暴露调试接口（`%APPDATA%\Antigravity\DevToolsActivePort`）。我们编写的轻量 Node.js 守护进程只连接 `127.0.0.1` 本地回环，通过 WebSocket 动态完成样式与动效的热挂载，**原生二进制分毫未动**。
+**The Solution**: Utilizing the **Chrome DevTools Protocol (CDP)**. Antigravity exposes a local debugging port at runtime (`%APPDATA%\Antigravity\DevToolsActivePort`). A lightweight background Node.js daemon connects strictly to `127.0.0.1` and dynamically injects the stylesheet and runtime engines. **The original binaries remain untouched.**
 
-### 2. Antigravity 官方 `aria-expanded` 属性假死 Bug
-当你在客户端开关侧边栏时，你可能会直觉地尝试使用 `button[aria-expanded="false"]` 或 `button[aria-expanded="true"]` 来切换顶部按钮的颜色。但排查 DOM 会发现一个大坑：
-- Antigravity 前端把该按钮的 `aria-expanded` **硬编码写死为了 `"false"`**，无论侧边栏怎么开合，该属性纹丝不动！
-- 顶部按钮在 DOM 中脱离了 `.bg-sidebar`，导致只要改了展开态，折叠态就看不清；改了折叠态，展开态又变黑。
+### 2. Antigravity's Hardcoded `aria-expanded` Bug
+When toggling the sidebar, one would naturally expect `button[aria-expanded="false"]` or `true` to switch top button colors. However, inspecting the real DOM reveals:
+- Antigravity **permanently hardcodes `aria-expanded="false"`** on the toggle button—it never changes regardless of sidebar state;
+- The top-left button cluster is positioned in a global absolute container (`div.absolute.left-0.top-0`) outside `.bg-sidebar`. Any static CSS rule applied to one state inadvertently breaks the other.
 
-**解决策略**：我找到了 Antigravity 切换状态时底层唯一真实改变的变量——根节点上的内联 CSS 变量 `--sidebar-width`（展开时 `256px`，折叠时 `0px`）。守护脚本注入 MutationObserver 毫秒级感知该变量，动态向 `<html>` 打上 `data-sidebar-state="open"` 与 `closed` 标记，彻底把两套配色样式分流解耦。
+**The Solution**: We identified the only property that genuinely tracks the sidebar transition: the root container's inline CSS variable `--sidebar-width` (`256px` when open, `0px` when collapsed). A MutationObserver monitors this value in real-time and dispatches `data-sidebar-state="open"` or `closed` to `<html>`, completely decoupling both states.
 
-### 3. 设置面板白屏死锁 (TanStack Router Crash)
-如果将自定义主题名称直接写入 LocalStorage（例如 `localStorage.setItem('theme-preset-light', 'medieval-arcane')`），Antigravity 内部的路由在打开设置面板时因找不到该官方模板而抛出异常，导致设置窗口白屏且永远无法关闭。
+### 3. Settings Modal Crash (TanStack Router Deadlock)
+Writing a custom theme string directly into `localStorage.setItem('theme-preset-light', 'medieval-arcane')` crashes the internal TanStack router when opening settings, locking the user in a blank white modal.
 
-**解决策略**：注入逻辑严格将原生 `theme-preset-light` 维持在官方合法的 `"Default Light"`，将所有自定义色彩、材质与动效剥离至全新的 `data-ag-preset` 命名空间下独立托管，确保原生设置弹窗 100% 稳定可用。
+**The Solution**: The patch defensively enforces `theme-preset-light` to the official `"Default Light"` string, namespacing all custom palettes, textures, and canvas layers under independent `data-ag-preset` attributes. The native settings modal remains 100% stable.
 
 ---
 
-## 快速安装与使用
+## Quick Installation
 
-### 环境要求
-- Windows 10 / 11 或 macOS
-- Node.js 18+ (推荐 Node.js 20 LTS)
-- 已安装并正在运行的 Google Antigravity 客户端
+### Prerequisites
+- Windows 10 / 11 or macOS
+- Node.js 18+ (Node.js 20 LTS recommended)
+- Google Antigravity installed and running
 
-### 方式 A：Windows 一键快速安装（推荐）
+### Option A: Windows One-Click Silent Install (Recommended)
 
-1. 克隆本仓库到本地目录：
+1. Clone this repository:
    ```powershell
    git clone https://github.com/MandyWednesday/antigravity-medieval-arcane.git
    cd antigravity-medieval-arcane
    ```
 
-2. 运行一键后台安装脚本：
+2. Run the automated installer:
    ```powershell
    powershell -ExecutionPolicy Bypass -File scripts\install-windows.ps1
    ```
-   - 脚本会自动创建无黑窗后台守护进程；
-   - 自动在 Windows 开机启动项建立静默自启快捷方式；
-   - 启动 Antigravity 即可看到完整的羊皮纸与星尘粒子效果。
+   - Automatically initializes a windowless background daemon;
+   - Sets up a silent startup shortcut in Windows Startup;
+   - Launches instantly with active hot-injection into running Antigravity windows.
 
-### 方式 B：前台命令行运行 / 调试模式
+### Option B: Foreground Debugging Mode
 
-如果你希望直接在控制台查看 CDP 连接日志：
+If you prefer to run the daemon in the foreground and observe CDP logs:
 ```powershell
 node src\daemon.js
 ```
 
 ---
 
-## 一键无损卸载 (100% 回退出厂状态)
+## Clean Uninstallation (100% Factory Reversible)
 
-如果你想还原回 Antigravity 原厂默认外观，无需担心任何系统残留：
+To restore Antigravity to its original out-of-the-box appearance with zero system residue:
 
-运行卸载脚本：
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\uninstall-windows.ps1
 ```
-脚本会：
-1. 优雅停止后台守护进程并清理 PID 锁；
-2. 移除开机自启快捷方式；
-3. 通过 CDP 派发清理脚本，移除注入的 WebGL Canvas、SVG 节点与样式表，恢复原生 Default Light 外观。
+This script:
+1. Gracefully stops the daemon and removes the PID lock;
+2. Deletes the Windows startup shortcut;
+3. Sends a cleanup payload via CDP to remove all injected canvases, SVG widgets, and custom style rules, immediately restoring the factory Default Light theme.
 
 ---
 
-## 仓库结构
+## Repository Structure
 
 ```text
 antigravity-medieval-arcane/
-├── docs/images/            # 干净脱敏的实机效果展示图
+├── docs/images/            # Clean, privacy-sanitized showcase screenshots
 ├── src/
-│   ├── daemon.js           # CDP 本地守护监听进程
-│   ├── inject.js           # 核心运行时注入脚本（Three.js + SMIL + 双状态引擎）
-│   └── theme.css           # 独立样式表与配色变量定义
+│   ├── daemon.js           # CDP background monitoring daemon
+│   ├── inject.js           # Core runtime payload (Three.js + SMIL + Dual-State engine)
+│   └── theme.css           # Standalone CSS definitions & variables
 ├── scripts/
-│   ├── install-windows.ps1 # Windows 一键静默安装与开机自启配置
-│   ├── run-daemon.ps1      # 守护进程启动包装器
-│   ├── start-daemon.vbs    # VBScript 隐藏黑窗启动脚本
-│   └── uninstall-windows.ps1 # 一键完全卸载与出厂还原
-├── assets/                 # 矢量纹章、法阵与 WebP 羊皮纸材质
-├── CHANGELOG.md            # 严格按照 SemVer 梳理的 14 个版本演进深度记录
-├── LICENSE                 # MIT 开源协议
-└── README.md
+│   ├── install-windows.ps1 # One-click silent installer for Windows
+│   ├── run-daemon.ps1      # Daemon execution wrapper
+│   ├── start-daemon.vbs    # Windowless VBScript launcher
+│   └── uninstall-windows.ps1 # Clean uninstaller & factory reset
+├── assets/                 # Vector insignia, alchemy circles & parchment texture
+├── CHANGELOG.md            # English release archive (v1.0.0 through v14.0.0)
+├── CHANGELOG.zh-CN.md      # Chinese release archive
+├── LICENSE                 # MIT License
+├── README.md               # English documentation
+└── README.zh-CN.md         # Chinese documentation
 ```
 
 ---
 
-## 许可证
+## License
 
-本项目基于 [MIT License](LICENSE) 开源。欢迎 Star、Fork 或提交 Issue 一同探讨美化！
+This project is licensed under the [MIT License](LICENSE). Feel free to star, fork, or open an issue!

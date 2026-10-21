@@ -1,165 +1,161 @@
-# 更新日志 (Changelog)
+# Changelog
 
-本项目的版本记录遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范，版本号严格对齐 [语义化版本 2.0.0 (SemVer)](https://semver.org/lang/zh-CN/)。
+All notable changes to this project are documented in this file in adherence to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Semantic Versioning (SemVer)](https://semver.org/spec/v2.0.0.html).
+
+<p align="center">
+  <b>English</b> · <a href="CHANGELOG.zh-CN.md">简体中文</a>
+</p>
 
 ---
 
 ## [14.0.0] - 2026-10-22
 
-### 遇到的问题
-- **双状态循环看不清的死循环**：在开关侧边栏时，顶部左侧按钮（羽毛 Logo、侧边栏折叠键、后退前进键、全局搜索）出现反复看不清的矛盾。调亮展开态，折叠态就发白看不清；调暗折叠态，展开态在深色木纹上又变黑隐形。
-- **Antigravity 原生 DOM 属性假死**：深度排查发现，Antigravity 官方在折叠按钮上硬编码的 `aria-expanded` 属性**永久写死为 `"false"`**，无论侧边栏如何开合均不更新；且顶部按钮在 DOM 树中挂载在全局左上角绝对定位层（`div.absolute.left-0.top-0`），脱离了 `.bg-sidebar` 容器，导致所有静态 CSS 选择器在两个状态间互相覆盖踩踏。
+### Problems Encountered
+- **Cyclic Visibility Conflict Between Open & Closed Sidebar**: Toggling the sidebar created a recurring regression where top-left controls (feather logo, sidebar toggle, back/forward arrows, and search) were invisible in one state whenever tuned for the other. Setting them light for dark wood made them unreadable over light parchment when collapsed; setting them dark made them pitch black over dark wood when expanded.
+- **Antigravity Hardcoded `aria-expanded` Bug**: Deep DOM analysis revealed that Antigravity permanently hardcodes `aria-expanded="false"` on the toggle button—it never updates upon toggle. Furthermore, the top button cluster is rendered in a global absolute container (`div.absolute.left-0.top-0`) outside `.bg-sidebar`. Any static CSS rules inevitably clashed and trampled each other.
 
-### 优化与解决方案
-- **根节点内联变量观察者 (Dual-State Observer)**：精准捕获 Antigravity 切换侧边栏时唯一真实变化的底层标记——根容器内联样式 `--sidebar-width`（展开为 `256px`，折叠为 `0px`）。
-- **双状态物理隔离分流**：通过 MutationObserver 毫秒级动态向 `<html>` 派发 `data-sidebar-state="open"` 与 `data-sidebar-state="closed"`；
-- **独立高对比配色矩阵**：
-  - `[data-sidebar-state="open"]`：顶部按钮强制切换为明亮羊皮纸奶油金（`#F7EAD0`，带微弱金晕），在深色黑曜石木纹侧边栏上高对比清晰呈现；
-  - `[data-sidebar-state="closed"]`：顶部按钮自动切回深色铁胆铜墨（`#2B1D11`），在浅色羊皮纸主界面上锐利无虚影。
+### Solutions & Optimizations
+- **Root Inline Variable Observer**: Tracked the only genuine state indicator during sidebar transitions: the root container's inline `--sidebar-width` property (`256px` when open, `0px` when collapsed).
+- **Physical Dual-State Decoupling**: Deployed a MutationObserver that dispatches `data-sidebar-state="open"` and `data-sidebar-state="closed"` attributes directly to `<html>` within milliseconds.
+- **Independent High-Contrast Color Matrix**:
+  - `[data-sidebar-state="open"]`: Enforces luminous parchment cream gold (`#F7EAD0` with a soft golden halo) against dark wood;
+  - `[data-sidebar-state="closed"]`: Switches automatically to deep iron-gall ink bronze (`#2B1D11`) over alabaster parchment, guaranteeing crisp contrast in both states.
 
 ---
 
 ## [13.0.0] - 2026-10-22
 
-### 遇到的问题
-- **聊天气泡操作栏在 Hover 时丢失**：鼠标悬停在用户历史提问气泡上时，右下角的撤回/重新编辑（Revert）、复制（Copy）与时间戳按钮组完全不可见。经排查，此前全局为了清除底部渐变遮罩而匹配的 `div[class*="bottom-0"]` 规则，误伤了带有 `bottom-0.5 right-0.5 user-input-buttons-container` 类名的功能栏。
-- **左侧炼金法阵动效停滞**：原 CSS `@keyframes` 旋转由于缺少 `transform-box: fill-box`，在复杂缩放比例下计算出的变换中心发生漂移，导致旋转卡滞。
+### Problems Encountered
+- **Missing Action Bar on User Message Hover**: Hovering over historical user query cards failed to display the Revert/Edit, Copy, and Timestamp buttons. A previous rule designed to remove viewport bottom gradient masks matched `div[class*="bottom-0"]`, inadvertently hiding the action bar with `bottom-0.5 right-0.5 user-input-buttons-container`.
+- **Alchemy Watermark Rotation Freezing**: CSS `@keyframes` rotation lacked `transform-box: fill-box`, causing SVG transform-origin coordinates to drift and freeze during dynamic viewport scaling.
 
-### 优化与解决方案
-- **排除操作栏误伤**：在底部遮罩清理选择器中显式增加 `:not(.user-input-buttons-container):not([class*="user-input"])` 排除白名单，并在气泡 hover 时强制注入 `display: flex !important`，使撤回与复制功能稳定浮现。
-- **重构原生 SVG SMIL 矢量转盘**：将法阵旋转逻辑重构为标准化 SMIL `<animateTransform>`，外圈 22 秒顺时针顺滑旋转，内圈 16 秒逆向呼应；层级严格固定在底层底纹（`z-index: 0`），绝不遮挡文字点击与选中文本。
+### Solutions & Optimizations
+- **Action Bar Protection**: Added `:not(.user-input-buttons-container):not([class*="user-input"])` whitelisting to gradient kill rules and explicitly styled `.user-input-buttons-container` as `display: flex !important` on hover.
+- **Native SVG SMIL Dual-Rotation Engine**: Reconstructed the alchemy circle with declarative SMIL `<animateTransform>`, establishing an outer clockwise wheel (22s) and an inner counter-clockwise ring (16s) locked on the background watermark layer (`z-index: 0`).
 
 ---
 
 ## [12.0.0] - 2026-10-21
 
-### 遇到的问题
-- **Windows 下守护进程终端黑窗驻留**：直接通过终端运行 Node.js 守护进程会在任务栏常驻一个黑色的控制台窗口，无法沉浸在 Antigravity 中。
-- **开机自启缺失导致补丁易丢失**：每次系统重启或 Antigravity 重启后，因缺少常驻守护机制，需要重新打开终端手动执行注入。
+### Problems Encountered
+- **Visible Terminal Black Window on Windows**: Launching the Node.js daemon via traditional CLI left an obtrusive command prompt window on the taskbar, detracting from immersion.
+- **Missing Auto-Start & Persistence**: Daemon had to be restarted manually after system reboots.
 
-### 优化与解决方案
-- **静默后台守护桥接 (VBS + WMI)**：引入 `start-daemon.vbs` 与 PowerShell 脚本，利用 Windows WMI Process Create 静默拉起守护进程，无黑窗、无前台打扰。
-- **一键开机自启安装脚本**：编写 `scripts/install-windows.ps1`，自动向 Windows Startup 目录注入快捷方式，并实现进程自愈与 PID 互斥保护。
-- **出厂级一键卸载脚本**：编写 `scripts/uninstall-windows.ps1`，自动关闭进程、清理开机自启、并通过 CDP 向运行中的客户端派发还原指令，恢复原生 Default Light 出厂状态。
+### Solutions & Optimizations
+- **Silent WMI Process Spawner & VBScript Bridge**: Introduced `start-daemon.vbs` and WMI process creation scripts to launch the background daemon without terminal windows.
+- **Automated Windows Startup Installer**: Added `scripts/install-windows.ps1` to place a silent shortcut in the Windows Startup directory with PID mutual-exclusion locking.
+- **Factory-Reset Uninstaller**: Provided `scripts/uninstall-windows.ps1` to stop the daemon, delete startup shortcuts, and restore default appearance via CDP.
 
 ---
 
 ## [11.0.0] - 2026-10-21
 
-### 遇到的问题
-- **侧边栏灰色原生滚动条割裂感**：长列表滚动时出现系统默认灰色宽滚动条，严重破坏中世纪魔导书的复古氛围。
-- **展开折叠动画闪白**：在侧边栏宽度改变的 200ms 补间动画期间，主视口与边栏接缝处因重绘出现细小白线。
+### Problems Encountered
+- **Default Grey Scrollbars in Grimoire Sidebar**: Native OS scrollbars appeared in long conversation lists, clashing with the antique dark wood aesthetic.
+- **White Flashes During Sidebar Transitions**: Rapid width interpolation between `0px` and `256px` exposed temporary white lines along the canvas seam.
 
-### 优化与解决方案
-- **定制 WebKit 优雅滚动条**：全局重写 `::-webkit-scrollbar`，将滑块定制为古典黄铜半透圆角细条，悬浮时适度增亮，非激活时隐形。
-- **无缝过渡平滑补间**：注入接缝融合阴影（Box-shadow Inset），消除宽度动态调整过程中的光斑闪烁。
+### Solutions & Optimizations
+- **Bespoke WebKit Scrollbars**: Overhauled `::-webkit-scrollbar` with antique brass translucent thumbs and hover glow effects.
+- **Seam Blending Box-Shadow**: Injected inset shadows along the viewport boundary to eliminate transition artifacts.
 
 ---
 
 ## [10.0.0] - 2026-10-21
 
-### 遇到的问题
-- **原生设置面板白屏死锁**：若将自定义主题名直接写入 `localStorage.setItem('theme-preset-light', 'custom-name')`，Antigravity 内部的 TanStack Router 在匹配不到预设模板时会抛出未捕获异常，导致设置弹窗出现白屏死锁且无法再打开。
+### Problems Encountered
+- **Settings Modal Crash & Deadlock**: Writing custom preset names directly into `localStorage.setItem('theme-preset-light', 'custom')` caused TanStack router exceptions when opening the settings modal, leaving users stuck in a blank modal.
 
-### 优化与解决方案
-- **独立配置隔离层**：在注入代码中将 `theme-preset-light` 严格锁定为官方合法的 `"Default Light"`，将所有自定义色彩、材质与动效剥离至全新的 `data-ag-preset` 命名空间下独立托管，彻底根绝官方前端崩溃隐患。
+### Solutions & Optimizations
+- **Strict Configuration Sandbox**: Hardened the patch to preserve `theme-preset-light` as the official `"Default Light"` string, namespacing all custom palettes, textures, and canvas layers under independent `data-ag-preset` attributes.
 
 ---
 
 ## [9.0.0] - 2026-10-21
 
-### 遇到的问题
-- **单色羊皮纸缺乏视线锚点**：整个窗口全为浅色羊皮纸时，左侧文件/会话树与中间代码编辑区视觉界线模糊，长时间高强度使用产生视觉疲劳。
+### Problems Encountered
+- **Visual Eye Fatigue from Monolithic Light Tone**: Full-screen light parchment blurred the boundary between the project tree and the conversation workspace.
 
-### 优化与解决方案
-- **双色域中世纪魔导书 (Arcane Grimoire) 架构**：
-  - 侧边栏采用深色黑曜石/陈年胡桃木皮面质感（`#18120D`），打造翻开古老魔法书的厚重沉浸感；
-  - 主聊天区与代码编辑区保留呼吸感十足的微光羊皮纸；
-  - 顶部设计 `ARCANE GRIMOIRE • VII` 黄铜封印徽章与中世纪火漆封蜡装饰。
+### Solutions & Optimizations
+- **Two-Tone Arcane Grimoire Architecture**: Introduced a dark obsidian leather/wood sidebar (`#18120D`) paired with luminous parchment in the main workspace, topped with an ornate brass `ARCANE GRIMOIRE • VII` insignia and wax seal.
 
 ---
 
 ## [8.0.0] - 2026-10-21
 
-### 遇到的问题
-- **Three.js 微粒在窗口缩放时拉伸变形**：当用户调整窗口尺寸或分屏时，底层的 WebGL Canvas 点阵投影产生几何拉伸与锯齿。
-- **粒子亮度抢夺代码可读性**：过亮的粒子在深色代码块上方漂移时容易干扰字符判读。
+### Problems Encountered
+- **Particle Distortion on Window Resize**: WebGL particle projections distorted and suffered from pixelation during split-screen window resizing.
+- **High Particle Brightness Impairing Readability**: Overly bright particles drifting over dark code blocks compromised character legibility.
 
-### 优化与解决方案
-- **自适应 ResizeObserver 监听器**：为 WebGL Canvas 建立动态分辨率自适应引擎，完美对齐高刷屏设备像素比（DPR）。
-- **微粒光度衰减曲线与景深场**：将粒子透明度平衡在 `0.25 ~ 0.4` 区间，并加入鼠标微距斥力场，当光标移至粒子附近时柔和散开，保障 100% 文字可读性。
+### Solutions & Optimizations
+- **Dynamic ResizeObserver & DPR Scaling**: Implemented automatic canvas buffer resolution scaling matching high-DPI displays.
+- **Depth-of-Field & Proximity Repulsion**: Calibrated opacity between `0.25 ~ 0.40` and added a gentle cursor repulsion field to protect text clarity.
 
 ---
 
 ## [7.0.0] - 2026-10-21
 
-### 遇到的问题
-- **传统 CSS 背景动画 CPU 占用高且掉帧**：单纯使用大量 DOM 节点和 CSS keyframes 模拟漂浮星尘，在复杂长对话中容易引发浏览器重排重绘，造成轻微卡顿。
+### Problems Encountered
+- **DOM & CSS Animation Overhead**: Heavy DOM-based particle simulations caused frame drops and browser layout recalculations during long conversations.
 
-### 优化与解决方案
-- **GPU 硬件加速 Three.js 微粒引擎**：引入精简版 Three.js WebGL 渲染管线，在页面底层独立开辟 Canvas 视口，在 GPU 层面渲染 80~120 颗微小的金色星尘粒子，全天候恒定 60 FPS 顺滑运行。
+### Solutions & Optimizations
+- **Hardware-Accelerated WebGL Particle Pipeline**: Embedded a lightweight Three.js pipeline rendering 80~120 golden stardust particles directly on the GPU at a constant 60 FPS.
 
 ---
 
 ## [6.0.0] - 2026-10-20
 
-### 遇到的问题
-- **富文本 Alert 警示卡片色彩发暗**：GitHub 风格的 `NOTE` / `TIP` / `IMPORTANT` / `WARNING` / `CAUTION` 在羊皮纸滤镜下色彩灰暗，层级辨识度不足。
+### Problems Encountered
+- **Muted GitHub Callout Alerts**: Default callout colors appeared washed out and muddy over textured parchment.
 
-### 优化与解决方案
-- **五大标准 Alert 羊皮纸定制重构**：逐一适配手抄本矿物色系（苍蓝、翡翠绿、紫罗兰、琥珀金、朱砂红），边框采用典雅细线与半透底色，兼顾醒目的层级提示与复古格调。
+### Solutions & Optimizations
+- **Illuminated Manuscript Callout Palette**: Specially tuned mineral hues for NOTE (lapis blue), TIP (emerald green), IMPORTANT (royal violet), WARNING (amber gold), and CAUTION (vermilion red).
 
 ---
 
 ## [5.0.0] - 2026-10-20
 
-### 遇到的问题
-- **Mermaid 矢量图表背景穿透**：流程图、时序图在透明背景下与底层羊皮纸噪点发生干涉，文字边缘辨识度下降。
+### Problems Encountered
+- **Mermaid Vector Transparency Bleed**: Transparent diagram containers allowed parchment grain to bleed through, interfering with flowchart arrows and labels.
 
-### 优化与解决方案
-- **半透明柔光卡片衬底**：为所有 Mermaid 图表容器统一注入浅色柔光隔离板，提升折线、箭头与状态框的边缘锐利度。
+### Solutions & Optimizations
+- **Soft-Light Card Underlays**: Injected translucent soft-light backdrops behind all Mermaid diagrams, sharpening text and directional vectors.
 
 ---
 
 ## [4.0.0] - 2026-10-20
 
-### 遇到的问题
-- **中文字体在纯西文字体回退下排版凌乱**：西文字体加载后，中文字符 fallback 到系统粗糙黑体，行高与字距失衡。
+### Problems Encountered
+- **CJK Font Fallback Inconsistencies**: Mixed Latin and CJK text suffered from uneven baselines and clashing stroke weights.
 
-### 优化与解决方案
-- **三层排版字体族构建**：
-  - UI 导航界面：现代几何无衬线字体；
-  - 文本阅读区：书卷感强烈的 Antigravity Serif 配合更纱黑体 Slab（Sarasa Slab）；
-  - 代码区域：严格 1:2 等宽字形，字迹清晰不发虚。
+### Solutions & Optimizations
+- **Three-Tier Typography Hierarchy**: Configured clean geometric sans for UI controls, literary serif for body text, and strict 1:2 monospace for code blocks.
 
 ---
 
 ## [3.0.0] - 2026-10-19
 
-### 遇到的问题
-- **平铺贴图产生机械接缝网格**：直接平铺纹理图片在大显示器上出现明显的重复拼贴痕迹，显得廉价。
+### Problems Encountered
+- **Visible Tiling Grids in Background Textures**: Repeated small image tiles produced noticeable grid lines on ultra-wide monitors.
 
-### 优化与解决方案
-- **无缝高清羊皮纸 WebP 数据管线**：制作并压缩无损高保真羊皮纸纹理，经 Base64 编码直接集成至注入脚本，彻底消除外链加载延迟与网络依赖。
+### Solutions & Optimizations
+- **Seamless WebP Data Pipeline**: Crafted a lossless seamless parchment texture and encoded it directly into the injection script via Base64, eliminating external network dependencies.
 
 ---
 
 ## [2.0.0] - 2026-10-19
 
-### 遇到的问题
-- **全局样式直接覆盖导致原生微交互失效**：暴力覆盖全局 CSS 导致按钮按下效果、快捷键提示及聚焦环丢失。
+### Problems Encountered
+- **Loss of Native Button Press Feedback**: Aggressive CSS overrides destroyed default focus rings, keyboard shortcuts, and button press states.
 
-### 优化与解决方案
-- **精确样式沙盒化**：所有补丁规则通过精准的选择器和 CSS 变量进行局部覆写，原汁原味保留 Antigravity 原生的所有快捷键与交互反馈。
+### Solutions & Optimizations
+- **Scoped Style Sandboxing**: Restricted all theme overrides to targeted CSS variables and scoped classes, fully preserving Antigravity's interactive states.
 
 ---
 
 ## [1.0.0] - 2026-10-18
 
-### 遇到的问题
-- **冷灰工程界面带来视觉疲劳**：Google Antigravity 官方客户端界面仅提供冷灰色调，夜间或长时间工作容易引发视疲劳。
-- **官方无插件市场且防篡改**：官方客户端不提供自定义主题接口；直接解包修改 `.asar` 文件会破坏应用签名，并在客户端自动更新后被覆盖摧毁。
+### Problems Encountered
+- **Industrial Cold-Grey Aesthetic Causing Strain**: Default Antigravity client lacks built-in theme support, while modifying `.asar` packages breaks code signatures and is wiped on auto-updates.
 
-### 优化与解决方案
-- **开创性 CDP 无侵入热注入架构**：基于 Chrome DevTools Protocol (CDP)，通过本地 WebSocket 动态向客户端注入 CSS 与动效引擎。
-- **三大底线原则**：不修改 App 原包、不重打包 `.asar`、不破坏系统签名与自动更新，随时支持一秒还原出厂。
+### Solutions & Optimizations
+- **Non-Invasive CDP Runtime Injection**: Pioneered Chrome DevTools Protocol runtime injection via local WebSocket, delivering hot-reloading parchment styling without altering application binaries.

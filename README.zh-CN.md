@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MandyRalyeh/antigravity-medieval-arcane/releases"><img src="https://img.shields.io/badge/version-14.0.0-gold.svg?style=flat-square" alt="Version"></a>
+  <a href="https://github.com/MandyWednesday/antigravity-medieval-arcane/releases"><img src="https://img.shields.io/badge/version-14.1.0-gold.svg?style=flat-square" alt="Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-informational.svg?style=flat-square" alt="Platform">
   <img src="https://img.shields.io/badge/style-Medieval%20Arcane%20Parchment-amber.svg?style=flat-square" alt="Theme Style">

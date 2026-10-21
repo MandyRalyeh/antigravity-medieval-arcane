@@ -8,6 +8,20 @@ All notable changes to this project are documented in this file in adherence to 
 
 ---
 
+## [14.1.0] - 2026-10-22
+
+### Problems Encountered
+- **Black-on-Black Title Menubar & Dropdown Popup Clashes**: Clicking any of the top 4 window menu buttons (`Antigravity`, `File`, `View`, `Window`) rendered the active button into an illegible dark block, while the floating dropdown popup menu rendered near-invisible black text against a dark obsidian background (`#1A1108` text on `#18120D` container). This occurred because a legacy broad button rule scoped under `[data-testid="title-menu-bar"]` inadvertently flattened both the top trigger buttons and the child popup options.
+
+### Solutions & Optimizations
+- **Physical Decoupling of Menu Triggers & Popup Options**: Reconstructed selector hierarchy by isolating `button[data-testid="title-menu-bar-item"]` (top triggers) from `button[data-testid="title-menu-bar-option"]` (popup menu options).
+- **Responsive Dual-State Triggers**:
+  - `data-sidebar-state="open"`: Menubar triggers glow in luminous parchment gold (`#F7EAD0`) over dark obsidian sidebar with a gilded hover highlight (`#FFFFFF`);
+  - `data-sidebar-state="closed"`: Menubar triggers gracefully adapt to deep iron-gall bronze (`#2B1D11`) over alabaster parchment.
+- **Floating Grimoire Popup Card**: Transformed the dropdown container (`.absolute`) into an antique obsidian grimoire card with dark wood gradient (`#221A13` to `#17110C`), luminous gold filigree border (`rgba(212, 175, 55, 0.45)`), parchment white text (`#F5E8D0`), amber shortcut labels (`rgba(226, 190, 102, 0.85)`), and golden hover halos.
+
+---
+
 ## [14.0.0] - 2026-10-22
 
 ### Problems Encountered

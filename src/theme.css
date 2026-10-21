@@ -338,3 +338,95 @@ code, pre, .monaco-editor, .xterm, [class*="language-"], [class*="file-title"], 
 div[contenteditable="true"], textarea, [data-composer], .ProseMirror {
   font-family: 'Sarasa Mono Slab SC', '等距更纱黑体 Slab SC', 'Anthropic Mono', Consolas, monospace !important;
 }
+
+
+/* ==========================================================================
+   Menubar (Antigravity, File, View, Window) & Dropdown Menus (v14.1)
+   ========================================================================== */
+
+/* 1. Base Title Menubar Container */
+[data-ag-preset="medieval-arcane"] div:has(> [data-testid="title-menu-bar"]),
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(226, 190, 102, 0.25) !important;
+}
+
+/* 2. Menubar Trigger Buttons in OPEN state (over dark obsidian sidebar) */
+html[data-sidebar-state="open"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"],
+[data-sidebar-state="open"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"] {
+  color: #F7EAD0 !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+  transition: all 0.15s ease !important;
+}
+html[data-sidebar-state="open"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"]:hover,
+html[data-sidebar-state="open"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"].bg-secondary,
+html[data-sidebar-state="open"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"]:focus-visible {
+  background-color: rgba(226, 190, 102, 0.25) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.25) !important;
+}
+
+/* 3. Menubar Trigger Buttons in CLOSED state (over light parchment) */
+html[data-sidebar-state="closed"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"],
+[data-sidebar-state="closed"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"] {
+  color: #2B1D11 !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+  transition: all 0.15s ease !important;
+}
+html[data-sidebar-state="closed"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"]:hover,
+html[data-sidebar-state="closed"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"].bg-secondary,
+html[data-sidebar-state="closed"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-item"]:focus-visible {
+  background-color: rgba(43, 29, 17, 0.12) !important;
+  color: #000000 !important;
+  box-shadow: 0 0 6px rgba(43, 29, 17, 0.15) !important;
+}
+
+/* 4. Dropdown Menu Popup (floating grimoire card in both states) */
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] .absolute,
+[data-testid="title-menu-bar"] .absolute {
+  background-color: #1C150F !important;
+  background-image: linear-gradient(180deg, #221A13 0%, #17110C 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 16px rgba(212, 175, 55, 0.15) !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+  z-index: 9999 !important;
+}
+
+/* 5. Dropdown Menu Options */
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"],
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"] {
+  color: #F5E8D0 !important;
+  background-color: transparent !important;
+  border-radius: 5px !important;
+  font-weight: 500 !important;
+  transition: all 0.1s ease !important;
+}
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"] span,
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"] span {
+  color: #F5E8D0 !important;
+}
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"] span[class*="text-xs"],
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"] span.font-sans,
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"] span[class*="text-xs"],
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"] span.font-sans {
+  color: rgba(226, 190, 102, 0.85) !important;
+  opacity: 1 !important;
+}
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"]:hover:not(.pointer-events-none),
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"]:hover:not(.pointer-events-none) {
+  background-color: rgba(212, 175, 55, 0.28) !important;
+  color: #FFFFFF !important;
+}
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"]:hover:not(.pointer-events-none) span,
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"]:hover:not(.pointer-events-none) span {
+  color: #FFFFFF !important;
+}
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"].pointer-events-none,
+[data-ag-preset="medieval-arcane"] [data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"].pointer-events-none span,
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"].pointer-events-none,
+[data-testid="title-menu-bar"] [data-testid="title-menu-bar-option"].pointer-events-none span {
+  color: rgba(226, 190, 102, 0.6) !important;
+}

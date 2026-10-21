@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" width="100" height="140" fill="none">
+  <!-- Cork stopper -->
+  <polygon points="42,12 58,12 56,22 44,22" fill="#8B5A2B" stroke="#5C3A1E" stroke-width="1"/>
+  <!-- Glass lip & neck -->
+  <rect x="40" y="22" width="20" height="4" rx="2" fill="rgba(255,255,255,0.4)" stroke="#C5A059" stroke-width="1.2"/>
+  <path d="M44 26 L44 50 Q44 60 30 78 L20 115 Q18 126 30 130 L70 130 Q82 126 80 115 L70 78 Q56 60 56 50 L56 26 Z" 
+        fill="rgba(197, 160, 89, 0.08)" stroke="#C5A059" stroke-width="1.5"/>
+  <!-- Emerald Arcane Elixir Liquid -->
+  <path d="M23 110 L28 85 Q38 83 50 85 Q62 87 72 85 L77 110 Q80 124 68 126 L32 126 Q20 124 23 110 Z" 
+        fill="url(#elixirGrad)" opacity="0.75"/>
+  <!-- Liquid glow -->
+  <ellipse cx="50" cy="115" rx="20" ry="8" fill="#4FD1C5" opacity="0.3"/>
+  <!-- Glass highlights -->
+  <path d="M26 82 L22 112 Q20 120 28 124" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <circle cx="40" cy="102" r="2" fill="#A7F3D0" opacity="0.8"/>
+  <circle cx="58" cy="95" r="1.5" fill="#A7F3D0" opacity="0.6"/>
+  <circle cx="48" cy="112" r="2.5" fill="#A7F3D0" opacity="0.9"/>
+  <!-- Brass filigree stand -->
+  <path d="M16 130 L84 130 M30 130 L24 136 M70 130 L76 136" stroke="#936E2E" stroke-width="2" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="elixirGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34D399" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#059669" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#064E3B" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+</svg>

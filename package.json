@@ -1,0 +1,33 @@
+{
+  "name": "antigravity-medieval-arcane",
+  "version": "14.0.0",
+  "description": "Medieval Arcane fantasy parchment theme, Three.js stardust particles, and responsive UI engine for Google Antigravity via non-invasive Chrome DevTools Protocol runtime injection.",
+  "main": "src/daemon.js",
+  "scripts": {
+    "start": "node src/daemon.js",
+    "install:windows": "powershell -ExecutionPolicy Bypass -File scripts/install-windows.ps1",
+    "uninstall:windows": "powershell -ExecutionPolicy Bypass -File scripts/uninstall-windows.ps1"
+  },
+  "keywords": [
+    "antigravity",
+    "theme",
+    "medieval",
+    "arcane",
+    "parchment",
+    "threejs",
+    "particles",
+    "cdp",
+    "chrome-devtools-protocol",
+    "customization"
+  ],
+  "author": "Mandy Ralyeh (https://github.com/MandyWednesday)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MandyWednesday/antigravity-medieval-arcane.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MandyWednesday/antigravity-medieval-arcane/issues"
+  },
+  "homepage": "https://github.com/MandyWednesday/antigravity-medieval-arcane#readme"
+}

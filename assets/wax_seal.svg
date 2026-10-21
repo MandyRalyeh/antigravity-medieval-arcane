@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none">
+  <!-- Outer ragged wax rim -->
+  <circle cx="60" cy="60" r="54" fill="#6A1616" stroke="#460D0D" stroke-width="3"/>
+  <circle cx="60" cy="60" r="50" fill="#7D1B1B" opacity="0.9"/>
+  <circle cx="60" cy="60" r="44" stroke="#C5A059" stroke-width="1.8" stroke-dasharray="3,2" fill="none"/>
+  <circle cx="60" cy="60" r="40" stroke="#C5A059" stroke-width="1.2" fill="none"/>
+  <!-- Inner Arcane Symbol: Ouroboros Alchemical Ring + Star -->
+  <polygon points="60,26 69,45 89,45 73,58 79,78 60,66 41,78 47,58 31,45 51,45" fill="#C5A059" opacity="0.85"/>
+  <circle cx="60" cy="60" r="14" fill="#581313" stroke="#D4AF37" stroke-width="1.5"/>
+  <!-- Sun/Mercury Glyph in center -->
+  <circle cx="60" cy="60" r="5" stroke="#F4E8D0" stroke-width="1.5" fill="none"/>
+  <line x1="60" y1="52" x2="60" y2="55" stroke="#F4E8D0" stroke-width="1.5"/>
+  <line x1="60" y1="65" x2="60" y2="68" stroke="#F4E8D0" stroke-width="1.5"/>
+  <!-- Highlight gloss -->
+  <path d="M35 35 Q60 22 85 35 Q60 30 35 35 Z" fill="#FF8888" opacity="0.25"/>
+</svg>

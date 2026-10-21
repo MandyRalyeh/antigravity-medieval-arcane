@@ -1,0 +1,22 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime logs & process IDs
+*.log
+daemon.log
+daemon.pid
+*.pid
+
+# OS and temporary files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+
+# DevTools and editor files
+DevToolsActivePort
+.vscode/
+.idea/

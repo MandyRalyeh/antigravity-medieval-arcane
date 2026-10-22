@@ -75,31 +75,110 @@ and this project adheres to [Semantic Versioning 2.0.0](https://semver.org/spec/
 
 ---
 
-## Incubation & Engineering History (27-Round Overnight Sprint)
+## [0.9.0] - 2026-10-22
 
-Prior to open-sourcing, this theme underwent an extensive overnight engineering sprint (**2026-10-21 21:06 to 2026-10-22 02:09**) spanning over 3,000 internal steps and 27 iterative real-world interaction rounds:
+### Problem Identified
+- **Contrast Bleed Across Complex Markdown Elements**: Complex rendered elements interfered with the underlying parchment texture and vector watermark. In particular, standard callout blocks lacked contrast, Mermaid diagram typography was soft, and multi-line KaTeX formulas overlapped with background geometry.
+- **Privacy Exposure Risk Prior to Open Sourcing**: Showcase screenshots captured during development contained local workspace filepaths, unreleased code snippets, and conversational traces, creating de-anonymization risks.
 
-### Phase 1: Cyberpunk Exploration & Aesthetic Pivot (Rounds 4 ~ 5)
-- **Discarding Cyberpunk**: An initial neon cyberpunk theme was tested and abandoned due to severe visual fatigue and aesthetic dissonance with deep code work;
-- **Establishing Medieval Arcane**: Defined core requirements: **reject superficial CSS restyling; leverage modern WebGL pipelines (Three.js) and high-grade assets** to create an elegant, focused grimoire workspace.
+### Solution & Optimization
+- **Standardized Mineral Alert Callouts**: Engineered five distinct callout themes—Lapis Lazuli (NOTE), Malachite (TIP), Amethyst (IMPORTANT), Amber (WARNING), and Cinnabar (CAUTION)—each backed by anti-bleed translucent parchment cards;
+- **Anti-Bleed Backing Plates for Diagrams & KaTeX**: Isolated Mermaid flowcharts, sequence diagrams, and mathematical expressions with dedicated soft-glow plates;
+- **Full Privacy De-Identification**: Scrubbed all local machine paths and proprietary conversational data, regenerating clean, production-grade showcase assets (`docs/images/`).
 
-### Phase 2: Eliminating "Archaic Heaviness" & Scattered Widget Architecture (Rounds 6 ~ 11)
-- **Typography Calibration**: Solved blue font tinting, establishing high-contrast iron-gall bronze ink (`#2B1D11`);
-- **Balanced Composition**: Balanced the solitary left-aligned magic ring by introducing the Prague astronomical astrolabe and zodiac dial on the right;
-- **Replacing Flat SVG Assets**: Removed crude 2D alchemy phials, replacing them with WebGL 3D living candelabra and rising ember particles;
-- **Fixing Collision Avoidance Over-Detection**: Fixed a bug where wide composer cards triggered false-positive collisions that hid all decorative widgets, replacing it with a 2D bounding-box intersection algorithm;
-- **Aesthetic Refinement (Rejecting Archaic Clutter)**: Rejected early generated dragons and crystal balls as overly dated. Directed the aesthetic toward **Western fantasy elegance infused with Japanese anime-level precision**, prioritizing **scattered micro-widgets over bulky monolithic illustrations**.
+---
 
-### Phase 3: System Crash Remediation & Scope Isolation (Rounds 12 ~ 15)
-- **Critical Settings White-Screen Crash**: Solved a fatal bug where clicking "Settings" collapsed the React DOM tree due to `localStorage.getItem("theme-preset-light")` dictionary mismatches. Implemented **absolute scope isolation**, locking native presets to `"Default Light"`;
-- **Layout Cleansing**: Eliminated odd light slice artifacts, oversized card frames, and white border anomalies while restoring missing message bubble typography.
+## [0.8.0] - 2026-10-22
 
-### Phase 4: Action Bar Restoration & Dual-State Perception Engine (Rounds 16 ~ 19)
-- **Restoring Hover Action Bars**: Fixed a layout regression that concealed user message hover action buttons (Revert/Undo, Edit, Copy); restored arcane circle rotation;
-- **Color Refinement**: Shifted drab olive tones to vibrant, modern ivory gold;
-- **Overcoming the Sidebar `aria-expanded` Deadlock**: Discovered that Antigravity permanently hardcodes `aria-expanded="false"`. Engineered a `MutationObserver` to monitor root inline `--sidebar-width`, dynamically toggling `[data-sidebar-state="open"]` and `[data-sidebar-state="collapsed"]` to decouple top navigation styling.
+### Problem Identified
+- **Sidebar Expand/Collapse Cyclical Deadlock**: Top navigation buttons (quill logo, sidebar toggle, search, back/forward) were sharp when collapsed, but turned solid black when expanded. Tuning expanded styles caused them to blend into the parchment background when collapsed.
+- **Hardcoded `aria-expanded` Attribute**: Inspection revealed Antigravity permanently hardcodes `aria-expanded="false"` on the toggle button, preventing external styles from reading state.
+- **Accidental Suppression of Message Hover Action Bars**: Card restyling inadvertently concealed the hover action bar (Revert, Edit, Copy) on user message bubbles, and interrupted vector watermark rotation.
 
-### Phase 5: Markdown Stress Testing & Privacy Sanitization (Rounds 20 ~ 23)
-- **Full Markdown Verification**: Conducted exhaustive visual validation across GitHub-style alerts, multi-column tables, blockquotes, KaTeX formulas, and Mermaid diagrams;
-- **Strict Privacy De-Identification**: Scrubbed personal codebases, system paths, and user prompts, producing clean, production-grade showcase screenshots;
-- **Clean Injection Verification**: Verified zero disk file overwrites, zero database tampering, and instant factory rollback via the clean uninstall script.
+### Solution & Optimization
+- **Inline Width Perception Engine**: Discovered that `--sidebar-width` on the root inline style is the only true indicator of sidebar state (`>0px` when open, `0px` when closed). Implemented a lightweight `MutationObserver` to dispatch `[data-sidebar-state="open"]` and `[data-sidebar-state="collapsed"]` attributes to `:root`, cleanly decoupling color palettes;
+- **Restored Action Bars & Watermark Rotation**: Reconstructed `z-index` layering on message cards to restore hover action buttons, and fixed event handlers driving continuous SVG watermark rotation.
+
+---
+
+## [0.7.0] - 2026-10-22
+
+### Problem Identified
+- **Overly Drab Ochre Palette**: Early parchment tones leaned toward a heavy, dark olive-yellow, causing eye strain and feeling visual heavy during extended reading.
+- **Sidebar Hover Glow Artifacts & Layer Overlap**: Hovering over sidebar session items produced an uncalibrated white glare strip on the right edge, while the left alchemy circle overlapped task titles.
+
+### Solution & Optimization
+- **Modern Ivory Gold Parchment Architecture**: Upgraded workspace tones to an airy ivory gold (`#FAF4E8` / `#F6EFE2`), uniting antique manuscript warmth with modern clarity;
+- **Eliminated Glare & Enforced Z-Index Isolation**: Overhauled `:hover` states on sidebar items to remove harsh white glares; pinned vector watermarks to `z-index: 0` with `pointer-events: none` to guarantee absolute text priority.
+
+---
+
+## [0.6.0] - 2026-10-22
+
+### Problem Identified
+- **Light Slice Artifacts & Frame Distortions**: Early attempts to scatter decorative micro-widgets across the UI resulted in CSS selector leakage that generated unnatural rectangular light slices and distorted message borders.
+- **Disappearing Message Bubbles and Typography**: Broad style rules inadvertently overridden the core conversation stream container, stripping message bubble frames and turning fonts invisible.
+
+### Solution & Optimization
+- **Style Cleansing & Precise Selector Scoping**: Stripped leaky decorative classes and confined micro-widgets strictly to safe window perimeters;
+- **Container Inheritance Restoration**: Re-anchored primary message bubble selectors with iron-gall bronze typography declarations and dual-layer subtle parchment cards.
+
+---
+
+## [0.5.0] - 2026-10-22
+
+### Problem Identified
+- **Fatal White-Screen Crash on Settings Panel**: Clicking "Settings" inside Antigravity immediately caused a total white-screen freeze, crashing the entire UI and requiring force-killing the process.
+- **Root Cause Decompilation**: Decompiling client bundle code revealed that opening Settings triggers a hardcoded lookup: `localStorage.getItem("theme-preset-light")` against Antigravity's internal theme dictionary. When a custom theme name was stored in this key, the dictionary query failed, throwing an unhandled `TypeError: Cannot read properties of undefined` that completely collapsed the React root tree.
+
+### Solution & Optimization
+- **Absolute Scope Isolation**: Pinned the native preset key permanently to `"Default Light"` while isolating all custom colors, textures, and particle hooks into a private scope;
+- **Zero-Crash Resilience**: Ensured the native Settings modal opens, toggles, and closes without interference, completely eliminating white-screen crashes.
+
+---
+
+## [0.4.0] - 2026-10-22
+
+### Problem Identified
+- **Archaic Clutter and "Dated Fantasy" Aesthetics**: Early AI-generated assets (bulky dragons, crystal balls) felt heavy, dated, and ecclesiastical.
+- **Monolithic Graphics Obstructing Code**: Large, single-piece illustrations occupied valuable screen real estate, creating distractions during deep programming sessions.
+
+### Solution & Optimization
+- **Western Fantasy Meets Japanese Aesthetic Precision**: Replaced archaic motifs with an elegant, airy aesthetic balancing Western fantasy lore with refined Japanese anime-level delicacy;
+- **Scattered Micro-Widget Architecture**: Replaced monolithic graphics with lightweight, scattered micro-watermarks positioned along margins, preserving code readability.
+
+---
+
+## [0.3.0] - 2026-10-22
+
+### Problem Identified
+- **Collision Avoidance False Positives**: An early collision algorithm evaluated wide composer cards against window width, falsely detecting collisions in most viewports and hiding all decorative elements.
+- **Unbalanced Right-Side Canvas**: The left-aligned magic ring left the right half of the window feeling empty in maximized viewports.
+
+### Solution & Optimization
+- **2D Bounding-Box Intersection Algorithm**: Rebuilt collision detection using strict 2D rectangular overlap tests (`!(compRect.right < deskBox.left || compRect.left > deskBox.right ...)`), hiding corner items only when physically obstructed;
+- **Prague Astrolabe & Zodiac Dial Integration**: Placed the Prague astronomical clock and zodiac dial in the upper-right sky to establish a balanced celestial composition.
+
+---
+
+## [0.2.0] - 2026-10-22
+
+### Problem Identified
+- **Flat 2D SVG Phials Lacking Tactility**: Early flat vector alchemy bottles felt artificial and lacked depth, clipping awkwardly during window resizes.
+- **Font Blue-Cast & Visual Glare**: Early typography produced an unnatural blue tint against warm parchment, causing eye strain and soft edges.
+
+### Solution & Optimization
+- **WebGL 3D Living Candelabra**: Replaced flat SVG bottles with hardware-accelerated 3D brass candelabra featuring breathing amber flames and rising embers;
+- **High-Contrast Iron-Gall Bronze Ink**: Calibrated font colors into deep iron-gall bronze ink (`#2B1D11`), achieving razor-sharp readability.
+
+---
+
+## [0.1.0] - 2026-10-22
+
+### Problem Identified
+- **Closed-Source Architecture & Auto-Update Overwrite**: Google Antigravity is a closed-source client without a theme marketplace; unpacking `.asar` bundles breaks code signatures and is wiped out by client updates.
+- **Failure of Cyberpunk Neon Prototype**: Early trials with high-contrast cyberpunk themes resulted in severe visual fatigue during extended code sessions.
+
+### Solution & Optimization
+- **Medieval Arcane Parchment Direction Established**: Committed to developing an illuminated manuscript and golden arcane stardust theme for deep focus;
+- **Chrome DevTools Protocol Hot-Injection Architecture**: Built a lightweight local daemon communicating over loopback CDP ports to inject styles and WebGL canvases without modifying client binaries, ensuring 100% clean factory rollback.

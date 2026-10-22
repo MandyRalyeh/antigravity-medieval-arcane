@@ -21,15 +21,17 @@
 
 ---
 
-## Why This Theme Was Created
+## Overview & Background
+
+This is an immersive Medieval Arcane Grimoire theme and runtime interface patch I developed for my personal day-to-day workflow in Google Antigravity.
 
 When programming, designing system architectures, and training models for hours every day inside Google Antigravity, the default cold industrial grey interface easily induces severe visual fatigue. Existing themes often settle for trivial CSS color swaps or harsh cyberpunk neon palettes, which run contrary to the quiet focus needed for deep, extended coding sessions.
 
-In this project, we pursued the tranquility, tactile warmth, and timeless focus evoked by **ancient illuminated manuscripts, weathered parchment scrolls, and subtle golden arcane stardust**.
+I wanted something that brings the tactile warmth, timeless focus, and serenity evoked by **ancient illuminated manuscripts, weathered parchment scrolls, and subtle golden arcane stardust**.
 
 ### Core Design Philosophy
 1. **Classical Western Fantasy Meets Japanese Aesthetic Precision**:  
-   We deliberately rejected the heavy, grim ecclesiastical mood of archaic medieval art, as well as crude asset piling. Instead, we established an elegant aesthetic that balances **Western fantasy lore with refined Japanese anime-level delicacy and lightness**.
+   I deliberately rejected the heavy, grim ecclesiastical mood of archaic medieval art, as well as crude asset piling. Instead, I established an elegant aesthetic that balances **Western fantasy lore with refined Japanese anime-level delicacy and lightness**.
 2. **Scattered Arcane Micro-Widget Architecture**:  
    Rather than cluttering the screen with large, monolithic graphics that distract from code, high-precision alchemy circles, astrolabes, and drifting golden embers are **scattered gracefully across corners and borders as subtle background watermarks**, never obstructing text or code blocks.
 3. **Anti-Glare High-Contrast Typography**:  

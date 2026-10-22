@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MandyWednesday/antigravity-medieval-arcane/releases"><img src="https://img.shields.io/badge/version-14.3.0-gold.svg?style=flat-square" alt="Version"></a>
+  <a href="https://github.com/MandyWednesday/antigravity-medieval-arcane/releases"><img src="https://img.shields.io/badge/version-1.0.3-gold.svg?style=flat-square" alt="Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-informational.svg?style=flat-square" alt="Platform">
   <img src="https://img.shields.io/badge/style-Medieval%20Arcane%20Parchment-amber.svg?style=flat-square" alt="Theme Style">
@@ -152,7 +152,7 @@ antigravity-medieval-arcane/
 │   ├── start-daemon.vbs    # Windowless VBScript launcher
 │   └── uninstall-windows.ps1 # Clean uninstaller & factory reset
 ├── assets/                 # Vector insignia, alchemy circles & parchment texture
-├── CHANGELOG.md            # English release archive (v1.0.0 through v14.0.0)
+├── CHANGELOG.md            # Detailed SemVer release notes and incubation history
 ├── CHANGELOG.zh-CN.md      # Chinese release archive
 ├── LICENSE                 # MIT License
 ├── README.md               # English documentation
